@@ -107,4 +107,41 @@ import pickle
 pickle.dump(rf, open('model.pkl','wb'))
 model=pickle.load(open('model.pkl','rb'))
 
+#--------------------------------
 
+from sklearn.linear_model import LogisticRegression
+rf= LogisticRegression()
+rf.fit(X_train, y_train)
+ypred=rf.predict(X_test)
+print(confusion_matrix(y_test,ypred))
+
+
+from sklearn.model_selection import cross_val_score
+acc=cross_val_score(estimator=rf,X=X_train,y=y_train,cv=10)
+acc.mean()
+acc.std()
+
+import pickle
+# Saving model to disk
+pickle.dump(rf, open('logistic.pkl','wb'))
+model=pickle.load(open('logistic.pkl','rb'))
+
+
+#--------------------------------
+
+from sklearn.ensemble import ExtraTreesClassifier
+rf= ExtraTreesClassifier()
+rf.fit(X_train, y_train)
+ypred=rf.predict(X_test)
+print(confusion_matrix(y_test,ypred))
+
+
+from sklearn.model_selection import cross_val_score
+acc=cross_val_score(estimator=rf,X=X_train,y=y_train,cv=10)
+acc.mean()
+acc.std()
+
+import pickle
+# Saving model to disk
+pickle.dump(rf, open('extratrees.pkl','wb'))
+model=pickle.load(open('extratrees.pkl','rb'))
